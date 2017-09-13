@@ -7,12 +7,12 @@ import { login } from '../../actions/auth';
 class LoginPage extends React.Component {
     submit = data =>
         this.props.login(data)
-            .then(() => this.props.history.push('/'));
+            .then(() => this.props.history.push('/dashboard'));
 
     render() {
         return(
             <div>
-                <h1>Login page</h1>
+                <h1>Sign in</h1>
 
                 <LoginForm submit={this.submit}/>
             </div>
@@ -25,6 +25,6 @@ LoginPage.propTypes = {
         push: PropTypes.func.isRequired
     }).isRequired,
     login: PropTypes.func.isRequired
-}
+};
 
 export default connect(null, { login })(LoginPage);
