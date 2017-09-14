@@ -10,6 +10,6 @@ export default {
                 .then(res => res.data.user),
         confirm: token =>
             axios.post('/api/auth/confirmation', {token})
-                .then(res => res.date.user)
+                .then(res => res.data.user)
     }
 }
