@@ -36,6 +36,12 @@ schema.methods.genereteJWT = function genereteJWT() {
     }, process.env.JWT_SECRET);
 }
 
+schema.methods.generateResetPasswordToken = function generateResetPasswordToken() {
+    return jwt.sign({
+        _id: this._id
+    }, process.env.JWT_SECRET, { expiresIn: "1h" });
+}
+
 schema.methods.toAuthJSON = function toAuthJSON() {
     return {
         email: this.email,
@@ -54,6 +60,10 @@ schema.methods.setConfirmationToken = function setConfirmationToken() {
 
 schema.methods.generateConfirmationUri = function generateConfirmationUri() {
     return `${process.env.HOST}/confirmation/${this.confirmationToken}`;
+}
+
+schema.methods.generateResetPasswordUri = function generateResetPasswordUri() {
+    return `${process.env.HOST}/reset-password/${this.generateResetPasswordToken()}`;
 }
 
 schema.plugin(uniqueValidator, { message:  'This email is already taken'});
